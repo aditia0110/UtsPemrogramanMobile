@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">MyApplication</string>
+    <string name="button_main">Toast</string>
+    <string name="button_label_hitung">Hitung</string>
+    <string name="hitung_initial_value">0</string>
+    <string name="toast_pesan">Halo saya Aditia Seftiawan</string>
+</resources>
