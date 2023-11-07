@@ -97,3 +97,18 @@ Source Code:
         android:backgroundTint="@color/biru"
         android:textColor="@color/white"/>
 </RelativeLayout>
+
+Penjelasan :  
+1. kita isi relative layout dengan 2 linear layout
+2. linear layout1 diisi dengan 3 textview:
+   * nama + nim
+   * jumlah klik pada tombol hitung
+   * angka fibonacci terakhir
+3. linear layout 2 berisi :
+   * button hitung
+   * button reset
+   * dan button toast  
+
+
+
+* MainActivity.Java :  
