@@ -7,7 +7,7 @@ Mata Kuliah : Pemrograman Mobile
 berikut adalah link video aplikasi yang di jalankan (dijalankan pada device menggunakan usb debugging) : [tonton video](https://youtu.be/uteJoBawN_Y)  
 <br>
 Source Code:  
-* activity_main.Xml (dibuat dengan design pada android studio):
+* toast_activity.Xml (dibuat dengan design pada android studio):
   
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -183,3 +183,40 @@ Penjelasan :
         mShowCountFibo.setText(Integer.toString(mCountFibo));
       }
       }
+
+  * colors.xml (untuk menambahkan warna)
+``` Java
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="biru">#0000ff</color>
+    <color name="red">#D10000</color>
+
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="kuning">#FFFF00</color>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700b3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+
+</resources>
+```
+* string.xml (untuk type data text)
+
+  ``` Java
+  <resources>
+    <string name="app_name">MyApplication</string>
+    <string name="button_main">Toast</string>
+    <string name="button_label_hitung">Hitung</string>
+    <string name="hitung_initial_value">0</string>
+    <string name="toast_pesan">Halo saya Aditia Seftiawan</string>
+</resources> 
+
+
+kurang lebihnya mohon maaf 
+
+Terimakasih
