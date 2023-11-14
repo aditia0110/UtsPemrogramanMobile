@@ -1,222 +1,452 @@
-## **Repositori ini dibuat untuk memenuhi penilaian tengah semester matakuliah pemrograman mobile**  
+## **Repositori ini dibuat untuk memenuhi penilaian Ujian Tengah Semester (UTS) matakuliah Pemrograman Mobile**  
 Nama : Aditia Seftiawan  
 Nim : 312210094  
 Kelas : TI.22.B1  
 Mata Kuliah : Pemrograman Mobile  
 **Tugas : Membuat tombol yang setiap diklik dapat bertambah angkanya, namun dengan urutan angka fibonacci, lalu lengkapi dengan fitur toast**  
-berikut adalah link video aplikasi yang di jalankan (dijalankan pada device menggunakan usb debugging) : [tonton video](https://youtu.be/uteJoBawN_Y)  
+berikut adalah link video aplikasi yang di jalankan (dijalankan pada device menggunakan usb debugging) : [tonton video](https://youtu.be/xENgn2FBhEs?si=6M0s3zG4_nbzQabH)  
 <br>
 Source Code:  
-* toast_activity.Xml (dibuat dengan design pada android studio):
-  
+* activity_main.Xml (dibuat dengan design pada android studio):
+```xml
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    >
+
     <LinearLayout
+        android:id="@+id/numberLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:background="#eeeeee"
-        android:orientation="vertical"
-        android:padding="40dp"
-        android:paddingRight="40dp">
+        android:layout_height="76dp"
+        android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Increment"
-            android:textAlignment="center"
-            android:textSize="24sp" />
+        <EditText
+            android:id="@+id/maxNumber"
+            android:layout_width="94dp"
+            android:layout_height="55dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="5dp"
+            android:ems="10"
+            android:freezesText="false"
+            android:inputType="numberDecimal"
+            android:text="0" />
 
-        <TextView
-            android:id="@+id/textViewNumber"
-            android:layout_width="match_parent"
+        <Button
+            android:id="@+id/buttonMax"
+            android:layout_width="143dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="0"
-            android:textAlignment="center"
-            android:textSize="24sp" />
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Fibonnaci"
-            android:textAlignment="center"
-            android:textSize="24sp" />
-
-        <TextView
-            android:id="@+id/textViewNumberFibo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="0"
-            android:textFontWeight="600"
-            android:textColor="@color/black"
-            android:textAlignment="center"
-            android:textSize="24sp" />
+            android:text="Set Maximum" />
     </LinearLayout>
 
-    <Button
-        android:id="@+id/button_toast"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        style="@style/Widget.AppCompat.Button"
-        android:text="Toast" />
-    <Button
-        android:id="@+id/button_reset"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Reset"
-        android:layout_margin="10dp"
-        android:backgroundTint="@color/red"
-        android:textColor="@color/white"
-        android:textAlignment="center"/>
-    <Button
-        android:id="@+id/button_hitung"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:backgroundTint="@color/teal_700"
-        android:layout_marginRight="10dp"
-        android:textColor="@color/white"
-        android:text="Hitung"/>
-        
-    </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/linear"
+        android:layout_width="match_parent"
+        android:layout_height="414dp"
+        android:layout_below="@id/numberLayout"
+        android:background="#eeeeee"
+        android:clipToPadding="false"
+        android:gravity="center"
+        android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/textNama"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="clip_horizontal|center"
+            android:layout_marginTop="-40dp"
+            android:layout_marginBottom="30dp"
+            android:text="Aditia Seftiawan (312210094)"
+            android:textAlignment="center"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/textCountFibo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:text="0"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textSize="150sp" />
+
+        <TextView
+            android:id="@+id/textCount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tombol Hitung diklik sebanyak : 0"
+            android:textAlignment="center"
+            android:textSize="20sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="29dp"
+                android:layout_weight="1"
+                android:text="Maksimum Angka fibo : "
+                android:textAlignment="textEnd"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/textMaxFibo"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="0"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="165dp"
+        android:layout_below="@id/linear"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/buttonCount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="1dp"
+            android:layout_marginLeft="1dp"
+            android:layout_marginTop="3dp"
+            android:hapticFeedbackEnabled="false"
+            android:text="HITUNG"
+            android:textAlignment="center"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/buttonReset"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="1dp"
+            android:layout_marginLeft="1dp"
+            android:layout_marginTop="3dp"
+            android:text="RESET"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/buttonToast"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tampilkan Toast"
+            android:textAlignment="center"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+</RelativeLayout>
+```
 
 Penjelasan :  
-1. kita isi relative layout dengan 2 linear layout
-2. linear layout1 diisi dengan 3 textview:
+1. kita isi relative layout dengan 3 linear layout
+2. linear layout 1 berisi editText dan button set maximum
+3. linear layout 2 diisi dengan 3 textview dan 1 linear layout horizontal:
    * nama + nim
    * jumlah klik pada tombol hitung
    * angka fibonacci terakhir
-3. linear layout 2 berisi :
-   * button hitung
-   * button reset
-   * dan button toast  
+   * linear layout : TextView untuk menampilkan jumlah maksimal angka fibonacci
+4. linear layout 3 berisi :
+   * linear layout 1 :button hitung + button reset
+   * linear layout 2 : button toast  
 
-* MainActivity.Java :
+* colors.xml
+```xml
+    <?xml version="1.0" encoding="utf-8"?>
+    <resources>
+        <color name="purple_200">#FFBB86FC</color>
+        <color name="purple_500">#FF6200EE</color>
+        <color name="purple_700">#FF3700B3</color>
+        <color name="teal_200">#FF03DAC5</color>
+        <color name="teal_700">#FF018786</color>
+        <color name="yellow">#F2EF1C</color>
+        <color name="green">#1CF234</color>
+        <color name="red">#F50A0A</color>
+        <color name="black">#FF000000</color>
+        <color name="white">#FFFFFFFF</color>
+        <integer-array name="warna_background_fibo">
+            <item>@color/red</item>
+            <item>@color/yellow</item>
+            <item>@color/green</item>
+        </integer-array>
+    </resources>
+```
 
-      package com.example.myapplication;
+* MainActivity.Java :  
 
-      import androidx.appcompat.app.AppCompatActivity;
+``` java
+import android.graphics.Color;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.text.Layout;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
-      import android.os.Bundle;
-      import android.view.View;
-      import android.widget.Button;
-      import android.widget.TextView;
-      import android.widget.Toast;
+public class MainActivity extends AppCompatActivity {
+    public int count = 0 ;
+    public int countFibo = 0 ;
+    public int maxFibo = 0;
+    public TextView showCount;
+    public TextView showCountFibo;
+    public TextView showMaxFibo;
+    public EditText maxNumber;
+    public Button buttonToast;
+    public Button buttonCount;
+    public Button buttonMax;
+    public Button buttonReset;
+    public Toast toastA;
+    public int[] warna;
+    public LinearLayout linear;
 
-      public class MainActivity extends AppCompatActivity {
-          private int mCount =0;
-          private int mCountFibo =0;
-          private TextView mShowCount;
-          private TextView mShowCountFibo;
-          private Button buttonToast;
-          private Button buttonHitung;
-          private Button buttonReset;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        buttonToast=(Button)findViewById(R.id.buttonToast);
+        buttonCount=(Button)findViewById(R.id.buttonCount);
+        buttonReset=(Button)findViewById(R.id.buttonReset);
+        buttonMax=(Button)findViewById(R.id.buttonMax);
+        showCount=(TextView)findViewById(R.id.textCount);
+        showCountFibo=(TextView)findViewById(R.id.textCountFibo);
+        showMaxFibo=(TextView)findViewById(R.id.textMaxFibo);
+        maxNumber=(EditText)findViewById(R.id.maxNumber);
+        warna = getResources().getIntArray(R.array.warna_background_fibo);
+        linear =(LinearLayout) findViewById(R.id.linear);
 
-
-          @Override
-        protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.toast_activity);
-            mShowCount = (TextView) findViewById(R.id.textViewNumber);
-            mShowCountFibo = (TextView) findViewById(R.id.textViewNumberFibo);
-            buttonToast = (Button) findViewById(R.id.button_toast);
-            buttonHitung = (Button) findViewById(R.id.button_hitung);
-            buttonReset = (Button) findViewById(R.id.button_reset);
-
-            buttonHitung.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View view) { hitungIncrement(view);}
-            });
-            buttonToast.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View view) { showToast(view);}
-        });
-        buttonReset.setOnClickListener(new View.OnClickListener(){
+        buttonToast.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) { resetCountDanFibbo(view);}
+            public void onClick(View v) {
+                if(toastA != null) { toastA.cancel(); }
+                    toastA = Toast.makeText(getApplicationContext(), "Angka Fibonacci : " + countFibo, Toast.LENGTH_SHORT);
+                    toastA.show();
+            }
         });
-        }
 
-        public void showToast(View view){
-            Toast toast = Toast.makeText(this,R.string.toast_pesan, Toast.LENGTH_SHORT);
-            toast.show();
-        }
-        public void hitungIncrement(View view){
-        mCount++;
-        int fibo = hitungFibonacci(mCount);
-        mCountFibo = fibo;
-        if (mShowCount != null && mShowCountFibo != null){
-            mShowCount.setText(Integer.toString(mCount));
-            mShowCountFibo.setText(Integer.toString(mCountFibo));
-        }
-        }
+        buttonCount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) { calculate(view); }
+        });
 
-        public int hitungFibonacci(int n){
-        if (n <= 1){
+        buttonReset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) { reset(view); }
+        });
+
+        buttonMax.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                String getNumber = maxNumber.getText().toString();
+                maxFibo = Integer.parseInt(getNumber);
+                showMaxFibo.setText(getNumber);
+                if(toastA != null) { toastA.cancel(); }
+                toastA = Toast.makeText(getApplicationContext(), "Angka Maksimum fibonacci diubah menjadi " + getNumber, Toast.LENGTH_SHORT);
+                toastA.show();
+            };
+        });
+
+    }
+    protected void calculate(View view){
+        if(calculateFibo(count + 1) >= maxFibo){
+            if(toastA != null) toastA.cancel();
+            toastA = Toast.makeText(getApplicationContext(),"Sudah Mencapai Maksimum !!", Toast.LENGTH_SHORT);
+            toastA.show();
+        }else{
+            count++;
+            linear.setBackgroundColor(warna[count % 3]);
+            countFibo = calculateFibo(count);
+            showCount.setText("Tombol Hitung diklik sebanyak : " + Integer.toString(count));
+            showCountFibo.setText(Integer.toString(countFibo));
+            if(count % 5 == 0){
+                if(toastA != null) toastA.cancel();
+                toastA = Toast.makeText(getApplicationContext(),"Tombol hitung diklik : "+ count + " Kali", Toast.LENGTH_SHORT);
+                toastA.show();
+            }
+        }
+    }
+
+    protected int calculateFibo(int n){
+        if(n <= 1) {
+            linear.setBackgroundColor(warna[2]);
             return n;
         }
-        int prev = 0;
-        int current = 1;
-        for(int i = 2; i <= n; i++){
-            int next = prev + current;
+        int prev,current,next;
+        prev = 0;
+        current = 1;
+        for (int i = 2; i <= n; i++) {
+            next = prev + current;
             prev = current;
             current = next;
         }
         return current;
-        }
-        public void resetCountDanFibbo(View view){
-        mCount = 0;
-        mCountFibo = 0;
-        mShowCount.setText(Integer.toString(mCount));
-        mShowCountFibo.setText(Integer.toString(mCountFibo));
-      }
-      }
+    }
 
-  * colors.xml (untuk menambahkan warna)
-``` Java
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
-    <color name="biru">#0000ff</color>
-    <color name="red">#D10000</color>
-
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
-    <color name="kuning">#FFFF00</color>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700b3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
-
-</resources>
+    protected void reset(View view){
+        count = 0;
+        countFibo = 0;
+        showCount.setText("Tombol Hitung diklik sebanyak : " + Integer.toString(count));
+        showCountFibo.setText(Integer.toString(countFibo));
+        linear.setBackgroundColor(Color.WHITE);
+    }
+}
 ```
-* string.xml (untuk type data text)
 
-  ``` Java
-  <resources>
-    <string name="app_name">MyApplication</string>
-    <string name="button_main">Toast</string>
-    <string name="button_label_hitung">Hitung</string>
-    <string name="hitung_initial_value">0</string>
-    <string name="toast_pesan">Halo saya Aditia Seftiawan</string>
-</resources> 
+penjelasan MainActivity.java :   
+``` Java
+    public int count = 0 ;
+    public int countFibo = 0 ;
+    public int maxFibo = 0;
+    public TextView showCount;
+    public TextView showCountFibo;
+    public TextView showMaxFibo;
+    public EditText maxNumber;
+    public Button buttonToast;
+    public Button buttonCount;
+    public Button buttonMax;
+    public Button buttonReset;
+    public Toast toastA;
+    public int[] warna;
+    public LinearLayout linear;
+
+```  
+* kita deklarasikan properti atau atribut yang akan kita gunakan dalam aplikasi ini
+* untuk count, countFibo dan maxFibo langsung kita isi dengan nilai 0 (integer)
+* masing masing diberi sesuai tipe data dan kita set visibility nya public
+<br> <br> <br>
+```java
+@Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        buttonToast=(Button)findViewById(R.id.buttonToast);
+        buttonCount=(Button)findViewById(R.id.buttonCount);
+        buttonReset=(Button)findViewById(R.id.buttonReset);
+        buttonMax=(Button)findViewById(R.id.buttonMax);
+        showCount=(TextView)findViewById(R.id.textCount);
+        showCountFibo=(TextView)findViewById(R.id.textCountFibo);
+        showMaxFibo=(TextView)findViewById(R.id.textMaxFibo);
+        maxNumber=(EditText)findViewById(R.id.maxNumber);
+        warna = getResources().getIntArray(R.array.warna_background_fibo);
+        linear =(LinearLayout) findViewById(R.id.linear);
+
+        buttonToast.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(toastA != null) { toastA.cancel(); }
+                    toastA = Toast.makeText(getApplicationContext(), "Angka Fibonacci : " + countFibo, Toast.LENGTH_SHORT);
+                    toastA.show();
+            }
+        });
+
+        buttonCount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) { calculate(view); }
+        });
+
+        buttonReset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) { reset(view); }
+        });
+
+        buttonMax.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                String getNumber = maxNumber.getText().toString();
+                maxFibo = Integer.parseInt(getNumber);
+                showMaxFibo.setText(getNumber);
+                if(toastA != null) { toastA.cancel(); }
+                toastA = Toast.makeText(getApplicationContext(), "Angka Maksimum fibonacci diubah menjadi " + getNumber, Toast.LENGTH_SHORT);
+                toastA.show();
+            };
+        });
+
+    }
+```
+* disini kita akan mengisi beberapa properti yang belum diisi sebelumnya sesuai dengan tipe data
+* lalu dihubungkan menggunakan tipe data dan juga id yang ada pada activity_main.xml
+* kemudian kita beri event atau aksi yang akan dilakukan ketika tombol tombol diklik
+* saat tombol hitung diklik maka akan menjalankan fungsi calculate
+* saat tombol reset diklik maka akan menjalankan fungsi reset
+* saat tombol setmaximum diklik maka akan mengisi nilai pada properti maxFibo dan menampilkan toast dengan informasi bahwa angka maksimm fibonacci telah diperbarui
+* saat tombol tampilkan toast diklik maka akan menampilkan toast dengan data angka fibonacci
+  <br> <br>
+
+```java
+    protected void calculate(View view){
+        if(calculateFibo(count + 1) >= maxFibo){
+            if(toastA != null) toastA.cancel();
+            toastA = Toast.makeText(getApplicationContext(),"Sudah Mencapai Maksimum !!", Toast.LENGTH_SHORT);
+            toastA.show();
+        }else{
+            count++;
+            linear.setBackgroundColor(warna[count % 3]);
+            countFibo = calculateFibo(count);
+            showCount.setText("Tombol Hitung diklik sebanyak : " + Integer.toString(count));
+            showCountFibo.setText(Integer.toString(countFibo));
+            if(count % 5 == 0){
+                if(toastA != null) toastA.cancel();
+                toastA = Toast.makeText(getApplicationContext(),"Tombol hitung diklik : "+ count + " Kali", Toast.LENGTH_SHORT);
+                toastA.show();
+            }
+        }
+    }
+```
+* saat fungsi dijalankan, akan dicek terlebih dahulu apakah nilai count + 1 itu sama dengan atau lebih dari jumlah maksimum fibo? jika iya maka akan ada toast yang menampilkan bahwa sudah mencapai maksimum, jika tidak maka nilai count akan ditambah 1 kemudian warna background akan diubah berdasarkan sisa bagi 3 dari count, dari sisa bagi 3 itu hasilnya akan digunakan sebagai index dalam memanggil array warna
+* kemudian count yang sudah ditambah , maka akan dijadikan nilai dalam menjalankan fungsi calculateFibo lalu akan menerima data baru yang telah diolah di fungsi tersebut dan kemusian dimasukkan ke properti countFibo
+* tampilkan jumlah klik tombol hitung dan juga angka fibonacci
+* kita tampilkan toast setiap tombol count diklik sebanyak 5 kali
+* untuk toastA.cancel() bermaksud agar toast yang sudah ada langsung dihentikan karena toast paling cepat akan hilang dalam dua detik, jika belum dua detik dan ada toast yang aktif maka toast yang baru akan masuk dalam antrian, dan akan dijalankan berurut setelah dua detik dengan cancel ini maka kita hentikan toast yang ada
+* lalu jalankan toast.show() agar langsung kita tampilkan toast yang baru
+<br> <br> <br>
+
+```java
+    protected int calculateFibo(int n){
+        if(n <= 1) {
+            linear.setBackgroundColor(warna[2]);
+            return n;
+        }
+        int prev,current,next;
+        prev = 0;
+        current = 1;
+        for (int i = 2; i <= n; i++) {
+            next = prev + current;
+            prev = current;
+            current = next;
+        }
+        return current;
+    }
+```
+*  jika angka yanng di kirim kurang dari sama dengan 1, maka akan kita ganti warna background menjadi index kedua, hal ini berguna ketika kita klik button hitung dua kali, meskipun count bertambah 1, namun fibonacci belum bertambah, maka dari itu angka fibonacci yang sama akan mendapat warna background yang sama
+* namun jika tidak diberi fungsi ini maka, pemilihan warna background akan berganti berdasarkan isi dari properti count, alhasil angka fibonacci 1 yang muncul dua kali tidak mendapat background warna yang sama
+* di fungsi calculateFibo angka count yang dikirimkan dari fungsi calculate akan diolah sehingga akan me return angka fibonacci
+<br> <br> <br>
+
+```java
+    protected void reset(View view){
+        count = 0;
+        countFibo = 0;
+        showCount.setText("Tombol Hitung diklik sebanyak : " + Integer.toString(count));
+        showCountFibo.setText(Integer.toString(countFibo));
+        linear.setBackgroundColor(Color.WHITE);
+    }
+```
+* disini semua properti angka dan textview akan direset
+* kemudian warna background akan diganti menjadi warna putih seperti sedia kala
 
 
-kurang lebihnya mohon maaf 
+Demikian sedikit penjelasan dari saya, kurang lebihnya mohon maaf
 
 Terimakasih
