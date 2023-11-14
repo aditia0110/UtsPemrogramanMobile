@@ -163,23 +163,28 @@ Penjelasan :
 * colors.xml
 ```xml
     <?xml version="1.0" encoding="utf-8"?>
-    <resources>
-        <color name="purple_200">#FFBB86FC</color>
-        <color name="purple_500">#FF6200EE</color>
-        <color name="purple_700">#FF3700B3</color>
-        <color name="teal_200">#FF03DAC5</color>
-        <color name="teal_700">#FF018786</color>
-        <color name="yellow">#F2EF1C</color>
-        <color name="green">#1CF234</color>
-        <color name="red">#F50A0A</color>
-        <color name="black">#FF000000</color>
-        <color name="white">#FFFFFFFF</color>
-        <integer-array name="warna_background_fibo">
-            <item>@color/red</item>
-            <item>@color/yellow</item>
-            <item>@color/green</item>
-        </integer-array>
-    </resources>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="biru">#0000ff</color>
+    <color name="red">#D10000</color>
+    <color name="grey"></color>
+
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="kuning">#FFFF00</color>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700b3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <integer-array name="warna_background_fibo">
+        <item>@color/red</item>
+        <item>@color/biru</item>
+        <item>@color/purple_200</item>
+    </integer-array>
+</resources>
 ```
 
 * MainActivity.Java :  
